@@ -1,0 +1,146 @@
+:root {
+  --brand: #0f6cbd;
+  --brand-hover: #115ea3;
+  --brand-pressed: #0c3b5e;
+  --text: #242424;
+  --text-muted: #616161;
+  --border: #e0e0e0;
+  --bg: #ffffff;
+  --bg-subtle: #f5f5f5;
+  --ok-bg: #f1faf1;
+  --ok-border: #9fd89f;
+  --ok-text: #0e700e;
+  --warn-bg: #fff9f5;
+  --warn-border: #fdcfb4;
+  --warn-text: #8a3707;
+  --err-bg: #fdf3f4;
+  --err-border: #eeacb2;
+  --err-text: #b10e1c;
+  --info-bg: #ebf3fc;
+  --info-border: #b4d6fa;
+  --info-text: #0f548c;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+[hidden] { display: none !important; }
+
+.sideload { padding: 16px; color: var(--text-muted); }
+
+/* Layout vertical: arreglo del panel que salía en fila */
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* Encabezado */
+.header { display: flex; align-items: center; gap: 12px; }
+.header__logo { width: 48px; height: 48px; border-radius: 8px; flex-shrink: 0; }
+.header__text { min-width: 0; }
+.header__title { margin: 0; font-size: 18px; font-weight: 600; }
+.header__subject {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Listas de destinatarios */
+.section__title {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+.recipients {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.recipients li { border-top: 1px solid var(--border); }
+.recipients li:first-child { border-top: 0; }
+.recipient {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.recipient input { margin: 0; width: 16px; height: 16px; accent-color: var(--brand); flex-shrink: 0; }
+.recipient__text { min-width: 0; }
+.recipient__name { display: block; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recipient__email { display: block; font-size: 12px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recipients--muted { background: var(--bg-subtle); }
+.recipients--muted .recipient { cursor: default; padding: 6px 10px; }
+.recipients--muted .recipient__name { font-weight: 400; color: var(--text-muted); }
+
+/* Botón principal con estados visibles */
+.actions { display: flex; flex-direction: column; gap: 8px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--brand);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.1s ease, transform 0.05s ease;
+}
+.btn:hover { background: var(--brand-hover); }
+.btn:active { background: var(--brand-pressed); transform: scale(0.98); }
+.btn:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.btn:disabled { background: #e0e0e0; color: #8a8a8a; cursor: not-allowed; transform: none; }
+.btn--busy:disabled { background: var(--brand-hover); color: #fff; cursor: progress; }
+
+.btn__spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.btn--busy .btn__spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hint { margin: 0; font-size: 12px; color: var(--text-muted); text-align: center; }
+
+/* Avisos */
+.status {
+  padding: 12px;
+  border: 1px solid;
+  border-radius: 6px;
+}
+.status__title { margin: 0; font-weight: 600; }
+.status__body { margin: 4px 0 0; font-size: 13px; }
+.status__list { margin: 6px 0 0; padding-left: 18px; font-size: 13px; }
+.status--ok { background: var(--ok-bg); border-color: var(--ok-border); color: var(--ok-text); }
+.status--warn { background: var(--warn-bg); border-color: var(--warn-border); color: var(--warn-text); }
+.status--err { background: var(--err-bg); border-color: var(--err-border); color: var(--err-text); }
+.status--info { background: var(--info-bg); border-color: var(--info-border); color: var(--info-text); }
